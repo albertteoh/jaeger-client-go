@@ -162,6 +162,8 @@ func (s *Span) appendLog(lr opentracing.LogRecord) {
 func (s *Span) SetBaggageItem(key, value string) opentracing.Span {
 	s.Lock()
 	defer s.Unlock()
+	fmt.Printf("Setting baggage item '%v->%v'", key, value)
+
 	s.tracer.setBaggage(s, key, value)
 	return s
 }
@@ -170,6 +172,7 @@ func (s *Span) SetBaggageItem(key, value string) opentracing.Span {
 func (s *Span) BaggageItem(key string) string {
 	s.RLock()
 	defer s.RUnlock()
+	fmt.Sprintf("Getting '%v' from baggage '%v'", key, s.context.baggage)
 	return s.context.baggage[key]
 }
 
