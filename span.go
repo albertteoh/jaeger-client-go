@@ -15,6 +15,7 @@
 package jaeger
 
 import (
+	"fmt"
 	"sync"
 	"time"
 
