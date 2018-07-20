@@ -173,7 +173,7 @@ func (s *Span) SetBaggageItem(key, value string) opentracing.Span {
 func (s *Span) BaggageItem(key string) string {
 	s.RLock()
 	defer s.RUnlock()
-	fmt.Sprintf("Getting '%v' from baggage '%v'\n", key, s.context.baggage)
+	fmt.Printf("Getting '%v' from baggage '%v'\n", key, s.context.baggage)
 	return s.context.baggage[key]
 }
 
