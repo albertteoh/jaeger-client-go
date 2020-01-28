@@ -266,12 +266,14 @@ func (r *remoteReporter) Close() {
 }
 
 func (r *remoteReporter) sendCloseEvent() {
+	r.logger.Error("[ALBTEO] Sending CloseEvent")
 	wg := &sync.WaitGroup{}
 	wg.Add(1)
 	item := reporterQueueItem{itemType: reporterQueueItemClose, close: wg}
 
 	r.queue <- item // if the queue is full we will block until there is space
 	atomic.AddInt64(&r.queueLength, 1)
+	r.logger.Error("[ALBTEO] CloseEvent inserted into queue")
 	wg.Wait()
 }
 
